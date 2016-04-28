@@ -48,12 +48,14 @@ char** createRand2d(int size, int cells)
 
 void printArr(char** arr, int size)
 {
+	cout << endl;
 	for (int y = 0; y < size; ++y)
 	{
 		for (int x = 0; x < size; ++x)
 			cout << arr[x][y] << " ";
 		cout << endl;
 	}
+	cout << endl;
 }
 
 void setCells(char** arr)
@@ -132,18 +134,31 @@ int main()
 {
 	srand(time(NULL));
 	int size;
-	cout << "Width*Height = ";
-	cin >> size;
-
-	//input creating cells
-	char **arr = createArr2d(size);
-	setCells(arr);
-			
-	//random creating cells
-	//char** arr = createRand2d(size,(size*size)/2);
 	
+	//get array size
+	cout << "Width = Height = ";
+	cin >> size;
+	char **arr = createArr2d(size);
+
+	cout << "Initialze Methods:" << endl;
+	cout << "[1] user input" << endl;
+	cout << "[2] random cells" << endl;
+
+	//get initializing mode & initialize	
+	int initMode = 2;
+	cin >> initMode;
+	switch(initMode){
+		case 1: 
+				setCells(arr);
+				break;
+		case 2:
+				arr = createRand2d(size,(size*size)/2);
+				break;
+	}
+
+	//show start generation and pause
 	printArr(arr,size);
-	cout << "\n...[ENTER] to start GoL";
+	cout << "\n...[ENTER] to start Conway" << endl;
 	cin.get();
 	cin.get();
 
@@ -152,6 +167,10 @@ int main()
 		cout << counter << ". Generation:" << endl;
 		printArr(arr,size);
 		arr = calculateNext(arr, size);
-		cin.get();
+
+		cout << "...[ENTER] to get next generation" << endl;
+		cout << "...[Q] + [ENTER] to quit program" << endl;
+		if(cin.get() == 'q')
+			break;
 	}
 }
