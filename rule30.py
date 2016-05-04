@@ -13,14 +13,14 @@ def getNextGen(old = []):
 	#"body"-field
 	for i in range(1,len(old)-1):
 		num = 0	
-		if(old[i-1] == 1): num += 3
+		if(old[i-1] == 1): num += 4
 		if(old[i] == 1): num += 2
 		if(old[i+1] == 1): num += 1
 		nextGen[i] = rule[num]
 
 	#right border
 	num = 0
-	if(old[len(old)-2] == 1): num += 3
+	if(old[len(old)-2] == 1): num += 4
 	if(old[len(old)-1] == 1): num += 2
 	nextGen[len(old)-1] = rule[num]
 
